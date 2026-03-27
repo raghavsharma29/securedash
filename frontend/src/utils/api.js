@@ -1,9 +1,9 @@
 import axios from "axios";
 
+const BACKEND = "https://securedash-backend-uoj4.onrender.com";
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
-    ? import.meta.env.VITE_API_URL + "/api"
-    : "/api",
+  baseURL: BACKEND + "/api",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -27,7 +27,6 @@ api.interceptors.response.use(
 
 export default api;
 
-// Auth
 export const authAPI = {
   login: (data) => api.post("/auth/login", data),
   me: () => api.get("/auth/me"),
@@ -35,12 +34,10 @@ export const authAPI = {
   getUsers: () => api.get("/auth/users"),
 };
 
-// Dashboard
 export const dashboardAPI = {
   getSummary: () => api.get("/dashboard/summary"),
 };
 
-// Vulnerabilities
 export const vulnAPI = {
   getAll: (params) => api.get("/vulnerabilities", { params }),
   getOne: (id) => api.get(`/vulnerabilities/${id}`),
@@ -49,7 +46,6 @@ export const vulnAPI = {
   delete: (id) => api.delete(`/vulnerabilities/${id}`),
 };
 
-// Scans
 export const scanAPI = {
   getAll: (params) => api.get("/scans", { params }),
   getOne: (id) => api.get(`/scans/${id}`),
@@ -58,7 +54,6 @@ export const scanAPI = {
   getTrend: (days) => api.get("/scans/stats/trend", { params: { days } }),
 };
 
-// Pipelines
 export const pipelineAPI = {
   getAll: (params) => api.get("/pipelines", { params }),
   getOne: (id) => api.get(`/pipelines/${id}`),
@@ -67,7 +62,6 @@ export const pipelineAPI = {
   getGateSummary: () => api.get("/pipelines/stats/gate-summary"),
 };
 
-// Remediation
 export const remediationAPI = {
   getAll: (params) => api.get("/remediation", { params }),
   getOne: (id) => api.get(`/remediation/${id}`),
