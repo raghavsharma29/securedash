@@ -1,4 +1,3 @@
-cat > /Users/raghav/Desktop/securedash/frontend/src/utils/api.js << 'EOF'
 import axios from "axios";
 
 const BACKEND = "https://securedash-backend-uoj4.onrender.com";
@@ -69,4 +68,3 @@ export const remediationAPI = {
   create: (data) => api.post("/remediation", data),
   update: (id, data) => api.patch(`/remediation/${id}`, data),
 };
-EOF
