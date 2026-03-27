@@ -37,7 +37,14 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // Health check
-app.get("/health", (req, res) => res.json({ status: "ok", service: "SecureDash API" }));
+app.get("/seed", async (req, res) => {
+  try {
+    require("../scripts/seed.js");
+    res.json({ message: "Seeding started..." });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // API Routes
 app.use("/api/auth", authRoutes);
